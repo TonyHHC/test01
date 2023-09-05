@@ -66,19 +66,15 @@ import NoMatch from "./component/NoMatch";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    
       <div>
         <TopMenuBar/>
-
-        <Routes>
-          <Route path="/" element={<ButtonDemo />} />
-          <Route path="/link1" element={<Link1 />} />
-          <Route path="/link2" element={<Link2 />} />
-        </Routes>
+        <MainCanvas/>
       </div>
-    </BrowserRouter>
+    
   );
 }
+
 
 
 

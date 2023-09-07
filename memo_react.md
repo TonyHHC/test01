@@ -15,6 +15,12 @@
 ## Install react-router-dom 套件
     npm i react-router-dom --save
 
+## Install axios 套件
+    npm install react-axios --save
+
+## Install prop-types 套件
+    npm install prop-types
+
 ### Routing
 |Library|應用|說明|
 |:--|:-:|:--|

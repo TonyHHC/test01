@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Space, Table, Tag } from 'antd';
+import axios from "axios";
 
 const columns = [
     {
@@ -73,12 +74,40 @@ const data = [
     },
 ];
 
-class Employee extends Component {
-    render() {
-        return (
+const Employee = () => {
+
+    const employeeColumns = [
+        {
+            title: 'ID',
+            dataIndex: 'ID',
+            key: 'ID',
+        },
+        {
+            title: 'Name',
+            dataIndex: 'Name',
+            key: 'Name',
+        },
+        {
+            title: 'SN',
+            dataIndex: 'SN',
+            key: 'SN',
+        }
+    ];
+
+    const [employeeDatas, setemployeeDatas] = useState(null);
+
+    axios.get('http://127.0.0.1:8800/test/getTest')
+        .then((response) => { setemployeeDatas(response.data); console.log(employeeDatas); })
+        .catch((error) => console.log(error));
+
+    return (
+        <div>
+            <Table columns={employeeColumns} dataSource={employeeDatas} />
             <Table columns={columns} dataSource={data} />
-        )
-    }
+        </div>
+        
+    )
+
 }
 
 export default Employee;

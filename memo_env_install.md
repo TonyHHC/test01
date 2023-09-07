@@ -46,3 +46,6 @@ verify
     cd test01/client_react
     npm install bootstrap
     npm install bootstrap react-bootstrap
+
+## ant design
+    npm install antd --save

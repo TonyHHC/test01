@@ -78,7 +78,7 @@ const data = [
 const setEmployeeID = (text) => {
     let id = text;
     localStorage.setItem('ID', id);
-    console.log("setEmployeeID:"+id);
+    console.log("setEmployeeID:" + id);
 }
 
 const ListEmployees = () => {
@@ -113,24 +113,30 @@ const ListEmployees = () => {
     ];
 
     const [employeeDatas, setemployeeDatas] = useState(null);
+    const [pagination, setPagination] = useState({current: 5, pageSize: 10});
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         axios.get('http://127.0.0.1:8800/test/getTest')
-            .then((response) => { 
+            .then((response) => {
                 response.data.forEach(function (obj) {
                     obj.Action = "Update";
                 })
                 setemployeeDatas(response.data);
-                console.log(employeeDatas); 
+                console.log(employeeDatas);
             })
             .catch((error) => console.log(error));
     }, []);
 
-    
+
 
     return (
         <div>
-            <Table columns={employeeColumns} dataSource={employeeDatas} />
+            <Table
+                columns={employeeColumns}
+                dataSource={employeeDatas}
+                loading={loading}
+            />
             <Table columns={columns} dataSource={data} />
         </div>
 

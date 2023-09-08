@@ -6,6 +6,23 @@
     create-react-app client_rect
     cd client_rect
 
+## `Important`
+Remove <React.StrictMode> from index.js This code will be
+
+    root.render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>
+    );
+
+this
+
+    root.render(
+        <App />
+    );
+
+React StrictMode renders components `twice` on dev server
+
 ## start react APP
     npm start
 

@@ -3,84 +3,6 @@ import { Navlink, useLocation, Link } from "react-router-dom";
 import { Space, Table, Tag } from 'antd';
 import axios from "axios";
 
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text) => <a>{text}</a>,
-    },
-    {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: (_, { tags }) => (
-            <>
-                {tags.map((tag) => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </>
-        ),
-    },
-    {
-        title: 'Action',
-        key: 'action',
-        render: (_, record) => (
-            <Space size="middle">
-                <a>Invite {record.name}</a>
-                <a>Delete</a>
-            </Space>
-        ),
-    },
-];
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
-
-const setEmployeeID = (text) => {
-    let id = text;
-    localStorage.setItem('ID', id);
-    console.log("setEmployeeID:" + id);
-}
-
 const ListEmployees = () => {
 
     const employeeColumns = [
@@ -113,31 +35,55 @@ const ListEmployees = () => {
     ];
 
     const [employeeDatas, setemployeeDatas] = useState(null);
-    const [pagination, setPagination] = useState({current: 5, pageSize: 10});
     const [loading, setLoading] = useState(false);
+    //const [gotoCurrentPage, setGotoCurrentPage] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const setEmployeeID = (text) => {
+        let id = text;
+        localStorage.setItem('ID', id);
+        localStorage.setItem('gotoCurrentPage', true);
+    }
+    
+    const onPageChange = (page) => {
+        setCurrentPage(page);
+        localStorage.setItem('CurrentPageOfListEmployees', page);
+        console.log("onPageChange:" + page);
+    }
 
     useEffect(() => {
+        console.log("useEffect->currentPage:" + localStorage.getItem('CurrentPageOfListEmployees'));
+
+        setLoading(true);
+        setCurrentPage(localStorage.getItem('CurrentPageOfListEmployees'));
+        //localStorage.setItem('CurrentPageOfListEmployees', 1);
+
         axios.get('http://127.0.0.1:8800/test/getTest')
             .then((response) => {
                 response.data.forEach(function (obj) {
                     obj.Action = "Update";
                 })
                 setemployeeDatas(response.data);
+                setLoading(false);
                 console.log(employeeDatas);
             })
             .catch((error) => console.log(error));
     }, []);
 
-
+    
 
     return (
         <div>
+            {currentPage}<p/>
             <Table
                 columns={employeeColumns}
                 dataSource={employeeDatas}
                 loading={loading}
+                pagination={{
+                    current:currentPage,
+                    onChange: (page, pageSize) => onPageChange(page),
+                }}
             />
-            <Table columns={columns} dataSource={data} />
         </div>
 
     )

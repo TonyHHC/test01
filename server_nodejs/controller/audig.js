@@ -47,3 +47,19 @@ export const getTest = (_, res) => {
     return res.status(200).json(jsonString);*/
 
 };
+
+export const getEmployee = (req, res) => {
+
+    const strSQL = "Select * From Employee Where ID=?";
+
+    db.query(strSQL, [req.query.id], (err, data) => {
+        if(err) {
+            return res.json(err);
+        } else {
+            return res.status(200).json(data);
+        }
+    });
+
+    
+
+};

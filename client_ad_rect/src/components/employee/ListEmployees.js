@@ -1,4 +1,5 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
+import { Navlink, useLocation, Link } from "react-router-dom";
 import { Space, Table, Tag } from 'antd';
 import axios from "axios";
 
@@ -74,13 +75,20 @@ const data = [
     },
 ];
 
-const Employee = () => {
+const setEmployeeID = (text) => {
+    let id = text;
+    localStorage.setItem('ID', id);
+    console.log("setEmployeeID:"+id);
+}
+
+const ListEmployees = () => {
 
     const employeeColumns = [
         {
             title: 'ID',
             dataIndex: 'ID',
             key: 'ID',
+            render: (text) => <Link to="/ViewEmployee" onClick={() => setEmployeeID(text)}>{text}</Link>,
         },
         {
             title: 'Name',
@@ -91,23 +99,43 @@ const Employee = () => {
             title: 'SN',
             dataIndex: 'SN',
             key: 'SN',
+        },
+        {
+            title: 'EMail',
+            dataIndex: 'EMail',
+            key: 'EMail',
+        },
+        {
+            title: 'Action',
+            dataIndex: 'Action',
+            key: 'Action',
         }
     ];
 
     const [employeeDatas, setemployeeDatas] = useState(null);
 
-    axios.get('http://127.0.0.1:8800/test/getTest')
-        .then((response) => { setemployeeDatas(response.data); console.log(employeeDatas); })
-        .catch((error) => console.log(error));
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8800/test/getTest')
+            .then((response) => { 
+                response.data.forEach(function (obj) {
+                    obj.Action = "Update";
+                })
+                setemployeeDatas(response.data);
+                console.log(employeeDatas); 
+            })
+            .catch((error) => console.log(error));
+    }, []);
+
+    
 
     return (
         <div>
             <Table columns={employeeColumns} dataSource={employeeDatas} />
             <Table columns={columns} dataSource={data} />
         </div>
-        
+
     )
 
 }
 
-export default Employee;
+export default ListEmployees;

@@ -53,8 +53,8 @@ const App = () => {
                 <span>Home</span>
               </NavLink>
             </Menu.Item>
-            <Menu.Item key="/employee">
-              <NavLink to="/employee">
+            <Menu.Item key="/ListEmployees">
+              <NavLink to="/ListEmployees">
                  <span>Employee</span>
               </NavLink>
             </Menu.Item>

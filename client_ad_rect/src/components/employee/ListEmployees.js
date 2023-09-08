@@ -36,18 +36,16 @@ const ListEmployees = () => {
 
     const [employeeDatas, setemployeeDatas] = useState(null);
     const [loading, setLoading] = useState(false);
-    //const [gotoCurrentPage, setGotoCurrentPage] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
 
     const setEmployeeID = (text) => {
         let id = text;
         localStorage.setItem('ID', id);
-        localStorage.setItem('gotoCurrentPage', true);
+        localStorage.setItem('CurrentPageOfListEmployees', currentPage);
     }
     
     const onPageChange = (page) => {
         setCurrentPage(page);
-        localStorage.setItem('CurrentPageOfListEmployees', page);
         console.log("onPageChange:" + page);
     }
 
@@ -56,7 +54,7 @@ const ListEmployees = () => {
 
         setLoading(true);
         setCurrentPage(localStorage.getItem('CurrentPageOfListEmployees'));
-        //localStorage.setItem('CurrentPageOfListEmployees', 1);
+        localStorage.setItem('CurrentPageOfListEmployees', 1);
 
         axios.get('http://127.0.0.1:8800/test/getTest')
             .then((response) => {
@@ -74,7 +72,7 @@ const ListEmployees = () => {
 
     return (
         <div>
-            {currentPage}<p/>
+            Page : {currentPage}<p/>
             <Table
                 columns={employeeColumns}
                 dataSource={employeeDatas}

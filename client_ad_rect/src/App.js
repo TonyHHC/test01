@@ -31,6 +31,9 @@ const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, i
 });
 
 const App = () => {
+  
+  console.log("App");
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();

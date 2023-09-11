@@ -1,38 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
 
-import React from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import React, { useState } from 'react';
+import { LaptopOutlined, NotificationOutlined, UserOutlined, TeamOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
 
 import { NavLink, useLocation, withRouter } from 'react-router-dom';
 import RouteContent from './components/routeContent/routeContent';
 
 const { Header, Content, Sider } = Layout;
-const items1 = ['1', '2', '3'].map((key) => ({
-  key,
-  label: `nav ${key}`,
-}));
 
-const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map((icon, index) => {
-  const key = String(index + 1);
+
+function setNavItem(label, key, icon, children, type){
   return {
-    key: `sub${key}`,
-    icon: React.createElement(icon),
-    label: `subnav ${key}`,
-    children: new Array(4).fill(null).map((_, j) => {
-      const subKey = index * 4 + j + 1;
-      return {
-        key: subKey,
-        label: `option${subKey}`,
-      };
-    }),
+    key,
+    icon,
+    children,
+    label,
+    type,
   };
-});
+}
+
+const NavItems = [
+  setNavItem("Employee", "Employee", <UserOutlined/>,[
+    setNavItem(<NavLink to="/">Home</NavLink>, "/" ),
+    setNavItem(<NavLink to="/ListEmployees">List Employees</NavLink>, "/ListEmployees" ),
+  ] ),
+  setNavItem("Laptop", "Laptop", <LaptopOutlined/> ),
+]
 
 const App = () => {
-  
+
   console.log("App");
+
+  const [collapsed, setCollapsed] = useState(false);
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
 
   const {
     token: { colorBgContainer },
@@ -40,6 +44,10 @@ const App = () => {
 
   const location = useLocation();
   console.log(new Date().toLocaleString() + " " + location.pathname);
+
+  const MenuClick = (selectedKeys) => {
+    console.log("MenuClick:"+selectedKeys);
+  }
 
   return (
     <Layout>
@@ -49,19 +57,29 @@ const App = () => {
           alignItems: 'center',
         }}
       >
+        <Button
+          type="primary"
+          onClick={toggleCollapsed}
+          style={{
+            margin:0,
+          }}
+        >
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        </Button>
         <div className="demo-logo" />
+
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['/']} selectedKeys={[location.pathname]} >
-            <Menu.Item key="/">
-              <NavLink to="/">
-                <span>Home</span>
-              </NavLink>
-            </Menu.Item>
-            <Menu.Item key="/ListEmployees">
-              <NavLink to="/ListEmployees">
-                 <span>Employee</span>
-              </NavLink>
-            </Menu.Item>
-          </Menu>
+          <Menu.Item key="/">
+            <NavLink to="/">
+              <span>Home</span>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item key="/ListEmployees">
+            <NavLink to="/ListEmployees">
+              <span>Employee</span>
+            </NavLink>
+          </Menu.Item>
+        </Menu>
       </Header>
       <Layout>
         <Sider
@@ -69,16 +87,18 @@ const App = () => {
           style={{
             background: colorBgContainer,
           }}
+          trigger={null}
+          collapsible collapsed={collapsed}
         >
           <Menu
             mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
+            defaultSelectedKeys={['/']}
+            defaultOpenKeys={['Employee']}
             style={{
               height: '100%',
               borderRight: 0,
             }}
-            items={items2}
+            items={NavItems}
           />
         </Sider>
         <Layout
@@ -86,15 +106,6 @@ const App = () => {
             padding: '0 24px 24px',
           }}
         >
-          <Breadcrumb
-            style={{
-              margin: '16px 0',
-            }}
-          >
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
           <Content
             style={{
               padding: 24,

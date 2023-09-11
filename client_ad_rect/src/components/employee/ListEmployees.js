@@ -59,16 +59,15 @@ const ListEmployees = () => {
         axios.get('http://127.0.0.1:8800/test/getTest')
             .then((response) => {
                 response.data.forEach(function (obj) {
+                    obj.key = obj.ID;
                     obj.Action = "Update";
                 })
                 setemployeeDatas(response.data);
                 setLoading(false);
-                console.log(employeeDatas);
+                //console.log(response.data);
             })
             .catch((error) => console.log(error));
     }, []);
-
-    
 
     return (
         <div>

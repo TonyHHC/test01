@@ -7,7 +7,7 @@
     mkdir mysql_data
 
 ### Start MySQL container
-    docker run --name mysql_test01 --rm -e MYSQL_ROOT_PASSWORD=sa -d -v /home/tony/project/react/test01/mysql_data:/var/lib/mysql -p 8816:3306 mysql
+    docker run --name mysql_test01 --rm -e MYSQL_ROOT_PASSWORD=sa -d -v /home/tony/project/react/fullstack_lab_01/mysql_data:/var/lib/mysql -p 8816:3306 mysql
 * 將會在 `home/tony/project/react/test01/mysql_data` 看到 MySql 的資料，未來 container 重啟資料會依然保存著
 * mysql container 的 3306 port 會 export 到本機的 8816 port，所以 mysql client 可以透過連線至本機的 8816 來存取 mysql
 

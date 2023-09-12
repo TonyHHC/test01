@@ -1,17 +1,21 @@
-import logo from './logo.svg';
+import logo from './ReactSymbol.png';
 import './App.css';
 
 import React, { useState } from 'react';
 import { LaptopOutlined, NotificationOutlined, UserOutlined, TeamOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Button, Space } from 'antd';
+import { Col, Divider, Row } from 'antd';
 
-import { NavLink, useLocation, withRouter } from 'react-router-dom';
+import { NavLink, useLocation, withRouter, Link } from 'react-router-dom';
 import RouteContent from './components/routeContent/routeContent';
+
+import TopNavMenu from './components/Menu/TopNavMenu';
+import LeftNavMenu from './components/Menu/LeftNavMenu';
 
 const { Header, Content, Sider } = Layout;
 
 
-function setNavItem(label, key, icon, children, type){
+function setNavItem(label, key, icon, children, type) {
   return {
     key,
     icon,
@@ -22,11 +26,13 @@ function setNavItem(label, key, icon, children, type){
 }
 
 const NavItems = [
-  setNavItem("Employee", "Employee", <UserOutlined/>,[
-    setNavItem(<NavLink to="/">Home</NavLink>, "/" ),
-    setNavItem(<NavLink to="/ListEmployees">List Employees</NavLink>, "/ListEmployees" ),
-  ] ),
-  setNavItem("Laptop", "Laptop", <LaptopOutlined/> ),
+  setNavItem("Employee", "Employee", <UserOutlined />, [
+    setNavItem(<NavLink to="/">Home</NavLink>, "/"),
+    setNavItem(<NavLink to="/ListEmployeesNP">No Pagination</NavLink>, "/ListEmployeesNP"),
+    setNavItem(<NavLink to="/ListEmployeesCP">Client Pagination</NavLink>, "/ListEmployeesCP"),
+    setNavItem(<NavLink to="/ListEmployeesSP">Server Pagination</NavLink>, "/ListEmployeesSP"),
+  ]),
+  setNavItem("Laptop", "Laptop", <LaptopOutlined />),
 ]
 
 const App = () => {
@@ -46,61 +52,43 @@ const App = () => {
   console.log(new Date().toLocaleString() + " " + location.pathname);
 
   const MenuClick = (selectedKeys) => {
-    console.log("MenuClick:"+selectedKeys);
+    console.log("MenuClick:" + selectedKeys);
   }
 
   return (
-    <Layout>
+    <Layout style={{
+      padding: '0 0 0',
+    }}>
+
       <Header
         style={{
           display: 'flex',
           alignItems: 'center',
+          padding: '0',
         }}
       >
-        <Button
-          type="primary"
-          onClick={toggleCollapsed}
-          style={{
-            margin:0,
-          }}
-        >
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </Button>
-        <div className="demo-logo" />
-
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['/']} selectedKeys={[location.pathname]} >
-          <Menu.Item key="/">
-            <NavLink to="/">
-              <span>Home</span>
-            </NavLink>
-          </Menu.Item>
-          <Menu.Item key="/ListEmployees">
-            <NavLink to="/ListEmployees">
-              <span>Employee</span>
-            </NavLink>
-          </Menu.Item>
-        </Menu>
-      </Header>
-      <Layout>
-        <Sider
-          width={200}
-          style={{
-            background: colorBgContainer,
-          }}
-          trigger={null}
-          collapsible collapsed={collapsed}
-        >
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={['/']}
-            defaultOpenKeys={['Employee']}
+        <div style={{ width: '40px' }}>
+          <Button
+            onClick={toggleCollapsed}
             style={{
-              height: '100%',
-              borderRight: 0,
+              margin: 0,
+              border: "none"
             }}
-            items={NavItems}
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            ghost
           />
-        </Sider>
+          </div>
+          <div style={{ width: '160px' }}>
+          <Link to='/'>
+            <img src={logo} width="125px" height="70px" style={{ display: 'block', margin: 'auto', }} />
+          </Link>
+        </div>
+        <TopNavMenu />
+
+      </Header>
+
+      <Layout>
+        <LeftNavMenu collapsed={collapsed} />
         <Layout
           style={{
             padding: '0 24px 24px',

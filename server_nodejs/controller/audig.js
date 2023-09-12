@@ -36,15 +36,19 @@ export const getTest = (_, res) => {
         }
     });
 
-    /*var jsonObj = {};
+};
 
-    jsonObj["aaa"] = "aaa";
-    jsonObj["bbb"] = "bbb";
-    jsonObj["ccc"] = "ccc";
+export const getAllEmployees = (_, res) => {
 
-    var jsonString = JSON.stringify(jsonObj);
+    var strSQL = "Select * From Employee";
 
-    return res.status(200).json(jsonString);*/
+    db.query(strSQL, (err, data) => {
+        if(err) {
+            return res.json(err);
+        } else {
+            return res.status(200).json(data);
+        }
+    });
 
 };
 

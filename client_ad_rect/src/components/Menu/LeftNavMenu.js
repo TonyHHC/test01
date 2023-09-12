@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined, TeamOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import { LaptopOutlined, NotificationOutlined, UserOutlined, TeamOutlined, MenuFoldOutlined, MenuUnfoldOutlined, HomeOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
 
 import { NavLink, useLocation, withRouter } from 'react-router-dom';
@@ -18,8 +18,9 @@ function setNavItem(label, key, icon, children, type) {
 }
 
 const NavItems = [
+    setNavItem(<NavLink to="/">Home</NavLink>, "/", <HomeOutlined />),
+    { type: 'divider' },
     setNavItem("Employee", "Employee", <UserOutlined />, [
-        setNavItem(<NavLink to="/">Home</NavLink>, "/"),
         setNavItem(<NavLink to="/ListEmployeesNP">No Pagination</NavLink>, "/ListEmployeesNP"),
         setNavItem(<NavLink to="/ListEmployeesCP">Client Pagination</NavLink>, "/ListEmployeesCP"),
         setNavItem(<NavLink to="/ListEmployeesSP">Server Pagination</NavLink>, "/ListEmployeesSP"),

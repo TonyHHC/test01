@@ -40,8 +40,8 @@ const ListEmployeesCP = () => {
 
     const setEmployeeID = (text) => {
         let id = text;
-        localStorage.setItem('ID', id);
-        localStorage.setItem('CurrentPageOfListEmployees', currentPage);
+        sessionStorage.setItem('ID', id);
+        sessionStorage.setItem('CurrentPageOfListEmployees', currentPage);
     }
     
     const onPageChange = (page) => {
@@ -50,11 +50,11 @@ const ListEmployeesCP = () => {
     }
 
     useEffect(() => {
-        console.log("useEffect->currentPage:" + localStorage.getItem('CurrentPageOfListEmployees'));
+        console.log("useEffect->currentPage:" + sessionStorage.getItem('CurrentPageOfListEmployees'));
 
         setLoading(true);
-        setCurrentPage(localStorage.getItem('CurrentPageOfListEmployees'));
-        localStorage.setItem('CurrentPageOfListEmployees', 1);
+        setCurrentPage(sessionStorage.getItem('CurrentPageOfListEmployees'));
+        sessionStorage.setItem('CurrentPageOfListEmployees', 1);
 
         axios.get('http://127.0.0.1:8800/test/getAllEmployees')
             .then((response) => {

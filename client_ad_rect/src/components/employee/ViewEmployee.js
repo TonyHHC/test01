@@ -9,8 +9,8 @@ const ViewEmployee = () => {
     const [Page, setPage] = useState(null);
 
     useEffect(() => {
-        setID(localStorage.getItem('ID'));
-        setPage(localStorage.getItem('CurrentPageOfListEmployees'));
+        setID(sessionStorage.getItem('ID'));
+        setPage(sessionStorage.getItem('CurrentPageOfListEmployees'));
         axios.get('http://127.0.0.1:8800/test/getEmployee?id=' + localStorage.getItem('ID'))
             .then((response) => {
                 setName(response.data[0].Name);

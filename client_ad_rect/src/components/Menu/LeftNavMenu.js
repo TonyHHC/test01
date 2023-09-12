@@ -38,6 +38,7 @@ const LeftNavMenu = (props) => {
             style={{
                 background: colorBgContainer,
                 overflow: 'auto',
+                height: '89vh',
             }}
             trigger={null}
             collapsible collapsed={props.collapsed}

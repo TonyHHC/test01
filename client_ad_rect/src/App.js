@@ -61,7 +61,7 @@ const App = () => {
     }}>
 
       <Header
-         style={{
+        style={{
           display: 'flex',
           alignItems: 'center',
           padding: '0',
@@ -80,8 +80,8 @@ const App = () => {
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             ghost
           />
-          </div>
-          <div style={{ width: '160px' }}>
+        </div>
+        <div style={{ width: '160px' }}>
           <Link to='/'>
             <img src={logo} width="125px" height="70px" style={{ display: 'block', margin: 'auto', }} />
           </Link>
@@ -103,6 +103,8 @@ const App = () => {
               margin: 0,
               minHeight: 280,
               background: colorBgContainer,
+              overflow: 'auto',
+              height: '89vh',
             }}
           >
             <RouteContent />

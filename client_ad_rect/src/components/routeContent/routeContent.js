@@ -16,7 +16,6 @@ class RouteContent extends Component {
                 <Route exact path="/ListEmployeesCP" element={<ListEmployeesCP/>} />
                 <Route exact path="/ViewEmployee" element={<ViewEmployee/>} />
             </Routes>
-            
         )
     }
 }

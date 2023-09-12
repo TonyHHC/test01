@@ -61,10 +61,13 @@ const App = () => {
     }}>
 
       <Header
-        style={{
+         style={{
           display: 'flex',
           alignItems: 'center',
           padding: '0',
+          position: 'sticky',
+          zIndex: 1,
+          top: 0,
         }}
       >
         <div style={{ width: '40px' }}>

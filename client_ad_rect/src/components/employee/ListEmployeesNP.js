@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
-import { Navlink, useLocation, Link } from "react-router-dom";
+import { Navlink, useLocation, Link, Outlet } from "react-router-dom";
 import { Space, Table, Tag } from 'antd';
 import axios from "axios";
 

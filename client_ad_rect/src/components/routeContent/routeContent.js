@@ -11,10 +11,10 @@ class RouteContent extends Component {
     render() {
         return (
             <Routes>
-                <Route exact path="/" element={<Home/>} />
-                <Route exact path="/ListEmployeesNP" element={<ListEmployeesNP/>} />
-                <Route exact path="/ListEmployeesCP" element={<ListEmployeesCP/>} />
-                <Route exact path="/ViewEmployee" element={<ViewEmployee/>} />
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/ListEmployeesNP" element={<ListEmployeesNP />} />
+                <Route exact path="/ListEmployeesCP" element={<ListEmployeesCP />} />
+                <Route exact path="/ViewEmployee" element={<ViewEmployee />} />
             </Routes>
         )
     }

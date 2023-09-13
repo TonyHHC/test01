@@ -103,7 +103,7 @@ const App = () => {
               margin: 0,
               minHeight: 280,
               background: colorBgContainer,
-              overflow: 'auto',
+              
               height: '89vh',
             }}
           >

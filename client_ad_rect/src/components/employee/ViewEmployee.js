@@ -11,10 +11,10 @@ const ViewEmployee = () => {
     useEffect(() => {
         setID(sessionStorage.getItem('ID'));
         setPage(sessionStorage.getItem('CurrentPageOfListEmployees'));
-        axios.get('http://127.0.0.1:8800/test/getEmployee?id=' + localStorage.getItem('ID'))
+        axios.get('http://127.0.0.1:8800/test/getEmployee?id=' + sessionStorage.getItem('ID'))
             .then((response) => {
                 setName(response.data[0].Name);
-                console.log(response.data[0].Name);
+                //console.log(response.data[0].Name);
             })
             .catch((error) => console.log(error));
     }, []);
@@ -23,7 +23,7 @@ const ViewEmployee = () => {
 
     return (
         <div>
-            Page:{Page}, Update ID:{id}, Name:{Name}
+            Page:{Page}, View ID:{id}, Name:{Name}
             <p />
             <Button type="primary" onClick={() => navigate(-1)}>OK</Button>
         </div>

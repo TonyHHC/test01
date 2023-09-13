@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component, useState, useEffect, useRef } from "react";
 import { Navlink, useLocation, Link, Outlet } from "react-router-dom";
 import { Space, Table, Tag } from 'antd';
 import axios from "axios";
@@ -10,7 +10,7 @@ const ListEmployeesNP = () => {
             title: 'ID',
             dataIndex: 'ID',
             key: 'ID',
-            render: (text) => <Link to="/ViewEmployee" onClick={() => setEmployeeID(text)}>{text}</Link>,
+            render: (text) => <Link to="/ViewEmployee" onClick={() => {setEmployeeID(text); getscroll();} }>{text}</Link>,
         },
         {
             title: 'Name',
@@ -39,14 +39,12 @@ const ListEmployeesNP = () => {
 
     const setEmployeeID = (text) => {
         let id = text;
-        localStorage.setItem('ID', id);
+        sessionStorage.setItem('ID', id);
     }
-    
-    useEffect(() => {
-        console.log("useEffect->currentPage:" + localStorage.getItem('CurrentPageOfListEmployees'));
 
+    useEffect(() => {
         setLoading(true);
-        localStorage.setItem('CurrentPageOfListEmployees', 1);
+        sessionStorage.setItem('CurrentPageOfListEmployees', 1);
 
         axios.get('http://127.0.0.1:8800/test/getAllEmployees')
             .then((response) => {
@@ -56,12 +54,32 @@ const ListEmployeesNP = () => {
                 })
                 setemployeeDatas(response.data);
                 setLoading(false);
+
             })
             .catch((error) => console.log(error));
+
+        ref.current.scrollTop = 880;
     }, []);
 
+    const ref = useRef();
+    const getscroll = () => {
+        const scroll = Math.abs(ref.current.getBoundingClientRect().top - ref.current.offsetTop);
+        console.log(scroll);
+        //console.log( ref);
+    };
+
+    const handleScroll = () => {
+        console.log("handleScroll");
+        ref.current.scrollTop = 880;
+    };
+
     return (
-        <div>
+        <div ref={ref}
+            style={{
+                overflow: 'auto',
+                height: '85vh',
+            }}>
+            <button onClick={handleScroll}>Scroll</button>
             <Table
                 columns={employeeColumns}
                 dataSource={employeeDatas}
@@ -69,7 +87,6 @@ const ListEmployeesNP = () => {
                 pagination={false}
             />
         </div>
-
     )
 
 }

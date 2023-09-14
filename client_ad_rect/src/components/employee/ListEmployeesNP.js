@@ -57,30 +57,33 @@ const ListEmployeesNP = () => {
 
             })
             .catch((error) => console.log(error));
-
-        ref.current.scrollTop = 880;
     }, []);
 
-    const ref = useRef();
-    const getscroll = () => {
-        const scroll = Math.abs(ref.current.getBoundingClientRect().top - ref.current.offsetTop);
-        console.log(scroll);
-        //console.log( ref);
-    };
+    useEffect(() => {
+        var scrollTop = sessionStorage.getItem("ListEmployeeNP_SPos");
+        if(scrollTop != null) {
+            console.log("ListEmployeeNP_SPos:" + scrollTop);
+            refParent.current.scrollTop = scrollTop;
+        }
+        //sessionStorage.setItem("ListEmployeeNP_SPos", 0);
+        
+    });
 
-    const handleScroll = () => {
-        console.log("handleScroll");
-        ref.current.scrollTop = 880;
+    const refParent = useRef();
+    const refChild = useRef();
+    const getscroll = () => {
+        const scroll = Math.abs(refChild.current.getBoundingClientRect().top - refChild.current.offsetTop);
+        sessionStorage.setItem("ListEmployeeNP_SPos", scroll);
+        //console.log("getscroll:" + scroll);
     };
 
     return (
-        <div ref={ref}
+        <div ref={refParent}
             style={{
                 overflow: 'auto',
                 height: '85vh',
             }}>
-            <button onClick={handleScroll}>Scroll</button>
-            <Table
+            <Table ref={refChild}
                 columns={employeeColumns}
                 dataSource={employeeDatas}
                 loading={loading}

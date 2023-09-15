@@ -27,6 +27,8 @@ const VerifyJwtToken = (props) => {
                 console.log(response.data);
                 console.log(response.data.message);
 
+                alert('Verify successful. \n' + response.data);
+
                 /*if (response.data.success === true) {
                     sessionStorage.setItem('userName', response.data.userName)
                     sessionStorage.setItem('token', response.data.token)
@@ -48,6 +50,7 @@ const VerifyJwtToken = (props) => {
             }).catch((error) => {
                 //console.log(error));
                 console.log(error.response.data.message);
+                alert('Verify failed : ' + error.response.data.message);
             })
         }
     }

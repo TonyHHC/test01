@@ -28,7 +28,7 @@ export const authentication = (req, res) => {
         success: true,
         login_check: true,
         password_check: true,
-        message: '認證成功...',
+        message: '成功...',
         token: token,
         loginID: setToken.loginID,
         userName: setToken.username

@@ -7,6 +7,7 @@ import ListEmployeesCP from "../employee/ListEmployeesCP";
 import ListEmployeesNP from "../employee/ListEmployeesNP";
 import ViewEmployee from "../employee/ViewEmployee";
 import JwtLogin from "../jwtAuthentication/jwtLogin";
+import VerifyJwtToken from "../jwtAuthentication/verifyJwtToken";
 
 class RouteContent extends Component {
     render() {
@@ -18,6 +19,7 @@ class RouteContent extends Component {
                 <Route exact path="/ViewEmployee" element={<ViewEmployee />} />
 
                 <Route exact path="/JwtLogin" element={<JwtLogin />} />
+                <Route exact path="/VerifyJwtToken" element={<VerifyJwtToken />} />
             </Routes>
         )
     }

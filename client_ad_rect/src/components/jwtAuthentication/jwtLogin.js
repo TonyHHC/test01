@@ -2,10 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Button, Checkbox, Form, Input } from 'antd';
 
-
-
-
-
 const JwtLogin = (props) => {
 
     const [formLogin] = Form.useForm();
@@ -24,12 +20,6 @@ const JwtLogin = (props) => {
 
         const loginID = formLogin.getFieldValue("userName")
         const password = formLogin.getFieldValue("password")
-
-        //setLogin(GetFormFieldValue("userName"));
-        //setPassword(GetFormFieldValue("password"));
-
-        //let loginID = GetFormFieldValue("userName");
-        //let password = GetFormFieldValue("password");
 
         console.log(loginID,password,'登入');
 
@@ -92,7 +82,7 @@ const JwtLogin = (props) => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
-        >password
+        >
             <Form.Item
                 label="Username"
                 name="userName"

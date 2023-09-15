@@ -28,7 +28,7 @@ const NavItems = [
     setNavItem("Laptop", "Laptop", <LaptopOutlined />),
     setNavItem("JWT", "JWT", <KeyOutlined />, [
         setNavItem(<NavLink to="/JwtLogin">取得 token</NavLink>, "/JwtLogin"),
-        setNavItem(<NavLink to="/ListEmployeesNP">驗證 token</NavLink>, "/ListEmployeesNP"),
+        setNavItem(<NavLink to="/VerifyJwtToken">驗證 token</NavLink>, "/VerifyJwtToken"),
     ]),
 ]
 

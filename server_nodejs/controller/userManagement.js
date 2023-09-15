@@ -20,7 +20,7 @@ export const authentication = (req, res) => {
     let token = jwt.sign(
         JSON.parse(JSON.stringify(setToken)),
         JWT_SECRET,
-        { expiresIn: 60 }
+        { expiresIn: 600 }
     )
 
     // 回傳認證成功 JWT Token
@@ -50,7 +50,7 @@ export function verifyToken(req, res, next) {
     let token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'];
     console.log("verify Token", token);
     if (token) {
-        jwt.verify(token, app.get('secret'), (err, decoded) => {
+        jwt.verify(token, JWT_SECRET, (err, decoded) => {
             if (err) {
                 return res.status(500).json({
                     success: false,

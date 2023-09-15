@@ -6,6 +6,7 @@ import Home from "../home/Home";
 import ListEmployeesCP from "../employee/ListEmployeesCP";
 import ListEmployeesNP from "../employee/ListEmployeesNP";
 import ViewEmployee from "../employee/ViewEmployee";
+import JwtLogin from "../jwtAuthentication/jwtLogin";
 
 class RouteContent extends Component {
     render() {
@@ -15,6 +16,8 @@ class RouteContent extends Component {
                 <Route exact path="/ListEmployeesNP" element={<ListEmployeesNP />} />
                 <Route exact path="/ListEmployeesCP" element={<ListEmployeesCP />} />
                 <Route exact path="/ViewEmployee" element={<ViewEmployee />} />
+
+                <Route exact path="/JwtLogin" element={<JwtLogin />} />
             </Routes>
         )
     }

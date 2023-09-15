@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined, TeamOutlined, MenuFoldOutlined, MenuUnfoldOutlined, HomeOutlined } from '@ant-design/icons';
+import { LaptopOutlined, NotificationOutlined, UserOutlined, TeamOutlined, MenuFoldOutlined, MenuUnfoldOutlined, HomeOutlined, KeyOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
 
 import { NavLink, useLocation, withRouter } from 'react-router-dom';
@@ -26,6 +26,10 @@ const NavItems = [
         setNavItem(<NavLink to="/ListEmployeesSP">Server Pagination</NavLink>, "/ListEmployeesSP"),
     ]),
     setNavItem("Laptop", "Laptop", <LaptopOutlined />),
+    setNavItem("JWT", "JWT", <KeyOutlined />, [
+        setNavItem(<NavLink to="/JwtLogin">取得 token</NavLink>, "/JwtLogin"),
+        setNavItem(<NavLink to="/ListEmployeesNP">驗證 token</NavLink>, "/ListEmployeesNP"),
+    ]),
 ]
 
 const LeftNavMenu = (props) => {

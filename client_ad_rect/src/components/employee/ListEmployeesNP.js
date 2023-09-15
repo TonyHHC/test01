@@ -10,7 +10,7 @@ const ListEmployeesNP = () => {
             title: 'ID',
             dataIndex: 'ID',
             key: 'ID',
-            render: (text) => <Link to="/ViewEmployee" onClick={() => {setEmployeeID(text); getscroll();} }>{text}</Link>,
+            render: (text) => <Link to="/ViewEmployee" onClick={() => { setEmployeeID(text); getscroll(); }}>{text}</Link>,
         },
         {
             title: 'Name',
@@ -61,12 +61,15 @@ const ListEmployeesNP = () => {
 
     useEffect(() => {
         var scrollTop = sessionStorage.getItem("ListEmployeeNP_SPos");
-        if(scrollTop != null) {
-            console.log("ListEmployeeNP_SPos:" + scrollTop);
+        if (scrollTop != null) {
+            //console.log("ListEmployeeNP_SPos:" + scrollTop);
+            //console.log(employeeDatas);
             refParent.current.scrollTop = scrollTop;
         }
-        //sessionStorage.setItem("ListEmployeeNP_SPos", 0);
-        
+
+        if (employeeDatas != null) {
+            sessionStorage.setItem("ListEmployeeNP_SPos", 0);
+        }
     });
 
     const refParent = useRef();

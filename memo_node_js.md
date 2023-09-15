@@ -10,6 +10,9 @@
 ## install mysql 套件
     npm install --save mysql
 
+## install jsonwebtoken 套件
+    npm install --save jsonwebtoken
+
 ## install cors 套件
     npm install cors
 

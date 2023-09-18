@@ -6,6 +6,21 @@ const VerifyJwtToken = (props) => {
 
     const [formVerifyToken] = Form.useForm();
 
+    const GetTokenExpiredTime = () => {
+        const token = sessionStorage.getItem("token");
+
+        if (token == null) {
+            alert('Please get token first.');
+        } else {
+            const tmpToken = JSON.parse(atob(token.split(".")[1]));
+            const timestamp = tmpToken.exp;
+            const expiration = new Date(timestamp*1000).toLocaleString();
+            console.log(expiration);
+
+            alert(expiration);
+        }
+    }
+
     const SubmitVerify = () => {
         console.log("SubmitVerify");
 
@@ -81,6 +96,9 @@ const VerifyJwtToken = (props) => {
             >
                 <Button type="primary" onClick={SubmitVerify}>
                     Verify
+                </Button>
+                <Button type="primary" onClick={GetTokenExpiredTime}>
+                    Get Token Expired Date
                 </Button>
             </Form.Item>
         </Form>

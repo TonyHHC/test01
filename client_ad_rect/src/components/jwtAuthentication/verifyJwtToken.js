@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, Space } from 'antd';
 
 const VerifyJwtToken = (props) => {
 
@@ -14,7 +14,7 @@ const VerifyJwtToken = (props) => {
         } else {
             const tmpToken = JSON.parse(atob(token.split(".")[1]));
             const timestamp = tmpToken.exp;
-            const expiration = new Date(timestamp*1000).toLocaleString();
+            const expiration = new Date(timestamp * 1000).toLocaleString();
             console.log(expiration);
 
             alert(expiration);
@@ -93,14 +93,17 @@ const VerifyJwtToken = (props) => {
                 wrapperCol={{
                     offset: 8,
                     span: 16,
+
                 }}
             >
-                <Button type="primary" onClick={SubmitVerify}>
-                    Verify
-                </Button>
-                <Button type="primary" onClick={GetTokenExpiredTime}>
-                    Get Token Expired Date
-                </Button>
+                <Space>
+                    <Button type="primary" onClick={SubmitVerify}>
+                        Verify
+                    </Button>
+                    <Button type="primary" onClick={GetTokenExpiredTime}>
+                        Get Token Expired Date
+                    </Button>
+                </Space>
             </Form.Item>
         </Form>
     );

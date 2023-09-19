@@ -2,6 +2,7 @@
 
 ## `注意`
 1. 注意視情況調整 db.js 裡面 ip & port 設定
+2. firewall port 8800 must be opened.
 
 ## creare new nodejs APP
     mkdir server_nodejs

@@ -66,6 +66,7 @@ const VerifyJwtToken = (props) => {
                 //console.log(error));
                 console.log(error.response.data.message);
                 alert('Verify failed : ' + error.response.data.message);
+                window.location.href = `${window.location.origin}/JwtLogin`;
             })
         }
     }

@@ -5,20 +5,23 @@ import { Breadcrumb, Layout, Menu, theme, Button } from 'antd';
 import { NavLink, useLocation, withRouter } from 'react-router-dom';
 
 const TopNavMenu = (props) => {
-    const {
-        token: { colorBgContainer },
-    } = theme.useToken();
+    
 
     return (
-        <Menu theme="dark" mode="horizontal" style={{ marginLeft: 'auto' }}>
-            <Menu.Item key="/">
-                <NavLink to="/">
-                    <span>Home</span>
+        <Menu theme="dark" mode="horizontal" style={{ marginLeft: 'auto', minWidth: '250px' }}>
+            <Menu.Item key="/Login">
+                <NavLink to="/Login">
+                    <span>Login</span>
                 </NavLink>
             </Menu.Item>
-            <Menu.Item key="/ListEmployeesCP">
-                <NavLink to="/ListEmployeesCP">
-                    <span>Employee</span>
+            <Menu.Item key="/Logout">
+                <NavLink to="/Logout">
+                    <span>Logout</span>
+                </NavLink>
+            </Menu.Item>
+            <Menu.Item key="/About">
+                <NavLink to="/About">
+                    <span>About</span>
                 </NavLink>
             </Menu.Item>
         </Menu>

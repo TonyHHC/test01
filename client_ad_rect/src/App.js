@@ -57,7 +57,7 @@ const App = () => {
 
   return (
     <Layout style={{
-      padding: '0 0 0',
+      padding: '0 0 0 0',
     }}>
 
       <Header

@@ -2,16 +2,26 @@ import React, { Component, useState, useEffect } from "react";
 import { Col, Divider, Row } from 'antd';
 
 const Home = () => {
-    
-    const [token, seteToken] = useState("");
+
+    const [token, setToken] = useState("");
+    const [tokenExpiration, setTokenExpiration] = useState("");
 
     useEffect(() => {
-        seteToken(sessionStorage.getItem("token"));
+        if (sessionStorage.getItem("token") != null) {
+            setToken(sessionStorage.getItem("token"));
+
+            const tmpToken = JSON.parse(atob(sessionStorage.getItem("token").split(".")[1]));
+            const timestamp = tmpToken.exp;
+            const expiration = new Date(timestamp * 1000).toLocaleString();
+            setTokenExpiration(expiration);
+        }
     }, []);
 
     return (
         <div>
             This is Page Home.
+            <p />
+            This is table sample :
             <Row>
                 <Col flex={2}>2 / 5</Col>
                 <Col flex={3}>3 / 5</Col>
@@ -25,12 +35,9 @@ const Home = () => {
                 <Col flex="auto">Fill Rest</Col>
             </Row>
 
-            <div>
-                <a>123</a>
-                <a>456</a>
-            </div>
-            <p/>
-            Token : {token}
+            <p />
+            Current Token : {token} <p />
+            Token Expiretion Time : {tokenExpiration}
         </div>
 
     )

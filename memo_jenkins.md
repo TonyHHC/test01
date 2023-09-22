@@ -20,7 +20,7 @@
 
     等一段時候之後，jenkins 就會要求輸入預設管理員密碼，畫面上提示 /var/jenkins_home/secrets/initialAdminPassword，但是我們有將容器的 /var/jenkins_home 對映到 host 的 /data/jenkins，所以我們可以在 /home/tony/project/jenkins/jenkins_data/secrets/initialAdminPassword 找到預設密碼
 
-## 將 jenkins 預設 shell 從 sh 變成 bash
+## `將 jenkins 預設 shell 從 sh 變成 bash`
     Manage Jenkins > Configure System > Shell > Shell executable
 
 ## 單純 Build Job 設定

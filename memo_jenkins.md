@@ -23,6 +23,14 @@
 ## `將 jenkins 預設 shell 從 sh 變成 bash`
     Manage Jenkins > Configure System > Shell > Shell executable
 
+## Node
+1. 在 console 啟動 Jenkins Node 時，所使用的 User ID 就會是 build job 啟動時所使用的 User ID
+2. 限制 Job 在某一個 Node 執行
+    
+    在 Job 設定中的 限制專案執行節點 設定如
+        
+        (172.17.0.1)
+
 ## 單純 Build Job 設定
 
 1. Add **Option** type Variable `$Choose_Steps`
